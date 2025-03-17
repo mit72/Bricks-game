@@ -1,8 +1,15 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-#myCanvas{
+#canvasContainer {
+    margin: auto;
+    justify-items: center;
+    align-items: center;
+
+}
+
+#myCanvas {
     background-color: aliceblue;
 }

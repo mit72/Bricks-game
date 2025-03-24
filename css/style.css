@@ -4,10 +4,11 @@
 }
 
 #canvasContainer {
+    display: flex;
     margin: auto;
     justify-items: center;
     align-items: center;
-
+    
 }
 
 #myCanvas {

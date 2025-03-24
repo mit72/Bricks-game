@@ -1,8 +1,8 @@
-/*hard = paddle width 75, speed 7
+/*
+    hard = paddle width 75, speed 7
     meduim = width 110, speed 6
     easy = width 125, speed 5
-    
-    */ 
+*/ 
 
 document.addEventListener('DOMContentLoaded', function () {
     var canvas = document.getElementById("myCanvas");
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var x = canvas.width / 2;
     var y = canvas.height - 30;
     //spreminjaj za hitrost
-    var speed = 6;
+    var speed = 5;
     var dx = speed;
     var dy = -speed;
     var ballColor = "#0095DD"
@@ -34,18 +34,51 @@ document.addEventListener('DOMContentLoaded', function () {
         y += dy;
 
         //da se odbije pr robu
+        /*
+        if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+            dx = -dx;
+        }
+        if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+            dy = -dy;
+        } */
+        /* if(paddleX < x+dx < paddleHeight+paddleX){
+            
+        } */
+
+        if( paddleX < (x+dx) && x+dx  < paddleX+paddleWidth && (y+dy >= canvas.height-paddleHeight)){
+            //console.log("hit "+"x: "+(x+dx)+"  y: "+(y+dy));
+            //console.log(paddleX+" "+(paddleX+paddleWidth));
+            dy = -dy;
+            console.log(""+(y+dy)+" "+(canvas.height-paddleHeight));
+            setTimeout(10);
+            
+        } else if(y + dy > canvas.height-ballRadius) {
+            
+            alert("GAME OVER");
+            document.location.reload();
+        }
+
         if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
             dx = -dx;
         }
         if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
             dy = -dy;
         }
+        if(y + dy < ballRadius) {
+            dy = -dy;
+        } else if(y + dy > canvas.height-ballRadius) {
+            alert("GAME OVER");
+            document.location.reload();
+            console.log("this")
+        }
+        //console.log('y:'+(y+dy));
     }
 
     
     setInterval(draw, 10);
     
     var paddleHeight = 10;
+    //paddle sirina
     var paddleWidth = 110;
     var paddleX = (canvas.width-paddleWidth)/2;
     
@@ -82,11 +115,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function keyUpHandler(e) {
         if(e.keyCode == 39) {
             rightPressed = false;
-            console.log(paddleX);
+            
         }
         else if(e.keyCode == 37) {
             leftPressed = false;
-            console.log(paddleX);
+            
         }
     }
         

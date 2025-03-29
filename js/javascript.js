@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function (){
     var ctx = canvas.getContext("2d");
     var x = canvas.width / 2;
     var y = canvas.height - 30;
-    var speed = 8;
+    var speed = 1.8;
     var rand = Math.random()*2;
     var dx = speed;
     var dy = -speed;
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function (){
         }
 
         if(x > canvas.width - ballRadius || x < ballRadius){
-            dx = -(dx+rand);
+            dx = -dx;
         }
         if(y > canvas.height - ballRadius || y < ballRadius){
             dy = -dy;
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function (){
 
     }
 
-    setInterval(draw, 10);
+    setInterval(draw, 1);
 
 
 
@@ -68,6 +68,14 @@ document.addEventListener('DOMContentLoaded', function (){
         ctx.fill();
         ctx.closePath();
     }
+
+    
+    var rightPressed = false;
+    var leftPressed = false;
+
+
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
 
     function keyDownHandler(e) {
         if(e.keyCode == 39) {

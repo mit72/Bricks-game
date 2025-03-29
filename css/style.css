@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#canvasContainer {
+    display: flex;
+    margin: auto;
+    justify-items: center;
+    align-items: center;
+    
+}
+
+#myCanvas {
+    background-color: aliceblue;
+}

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function (){
     var x = canvas.width / 2;
     var y = canvas.height - 30;
     var speed = 8;
+    var rand = Math.random()*2;
     var dx = speed;
     var dy = -speed;
     var checkEnd;
@@ -21,12 +22,15 @@ document.addEventListener('DOMContentLoaded', function (){
     }
 
     function draw(){
+        dy = speed * Math.sign(dy);
+        dx = speed * Math.sign(dx);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall();
-        
+        drawBricks();
+        drawPaddle();
 
         if(x > paddleX && x < paddleX + paddleWidth && y > canvas.height - paddleHeight - ballRadius){
-            dy = -dy;
+            dy = -(dy+rand);
             console.log("hit on paddle");
         } else if(!(x > paddleX && x < paddleX + paddleWidth) && y > canvas.height - ballRadius){
             alert("GAME OVER");
@@ -34,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function (){
         }
 
         if(x > canvas.width - ballRadius || x < ballRadius){
-            dx = -dx;
+            dx = -(dx+rand);
         }
         if(y > canvas.height - ballRadius || y < ballRadius){
             dy = -dy;
@@ -89,30 +93,81 @@ document.addEventListener('DOMContentLoaded', function (){
         }
     }
         
-        setInterval(drawPaddle,10);
+        
         
     //vlecenje z misko
     var dragging;
     document.addEventListener("mousedown", function(e) {
         var relativeX = e.clientX - canvas.offsetLeft;
         var relativeY = e.clientY - canvas.offsetTop;
-        if (relativeX > paddleX&& relativeX < paddleX + paddleWidth && relativeY > canvas.height - paddleHeight) {
+        if (relativeX > paddleX && relativeX < paddleX + paddleWidth && relativeY > canvas.height - paddleHeight) {
             dragging = true;
         }
     });
-    
+
     document.addEventListener("mouseup", function() {
         dragging = false;
     });
 
     document.addEventListener("mousemove", function(e) {
+        var relativeX = e.clientX - canvas.offsetLeft;
+        var relativeY = e.clientY - canvas.offsetTop;
+
+        if (relativeX > paddleX && relativeX < paddleX + paddleWidth && relativeY > canvas.height - paddleHeight) {
+            canvas.style.cursor = "pointer";
+        } else {
+            canvas.style.cursor = "default";
+        }
+
         if (dragging) {
-            var relativeX = e.clientX - canvas.offsetLeft;
             if (relativeX > 0 && relativeX < canvas.width) {
                 paddleX = relativeX - paddleWidth / 2;
             }
         }
     });
+
+
+
+
+
+var brickRowCount = 3;
+var brickColumnCount = 11;
+var brickWidth = 75;
+var brickHeight = 20;
+var brickPadding = 10;
+var brickOffsetTop = 30;
+var brickOffsetLeft = 30;
+
+
+
+var bricks = [];
+for (var c = 0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for (var r = 0; r < brickRowCount; r++) {
+        var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+        var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+        bricks[c][r] = { x: brickX, y: brickY };
+    }
+}
+
+
+function drawBricks() {
+    for (var c = 0; c < brickColumnCount; c++) {
+        for (var r = 0; r < brickRowCount; r++) {
+            var brick = bricks[c][r];
+            ctx.beginPath();
+            ctx.rect(brick.x, brick.y, brickWidth, brickHeight);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+}
+
+
+
+
+
 
     function checkEnd(){
         if(checkEnd){

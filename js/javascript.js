@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function (){
     var rand = Math.random()*2;
     var dx = speed;
     var dy = -speed;
-    var checkEnd;
+    var checkEndVar = false;
 
     var ballColor = "red";
     var ballRadius = 10;
@@ -21,7 +21,15 @@ document.addEventListener('DOMContentLoaded', function (){
         ctx.closePath();
     }
 
+    let gameInterval = setInterval(draw, 1);
+
     function draw(){
+
+        if (checkEndVar) {
+            clearInterval(gameInterval); 
+            return; 
+        }
+
         dy = speed * Math.sign(dy);
         dx = speed * Math.sign(dx);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -33,8 +41,9 @@ document.addEventListener('DOMContentLoaded', function (){
             dy = -(dy+rand);
             console.log("hit on paddle");
         } else if(!(x > paddleX && x < paddleX + paddleWidth) && y > canvas.height - ballRadius){
-            alert("GAME OVER");
-            document.location.reload();
+            
+            checkEndVar = true;
+            drawGameOver();
         }
 
         if(x > canvas.width - ballRadius || x < ballRadius){
@@ -48,7 +57,15 @@ document.addEventListener('DOMContentLoaded', function (){
 
     }
 
-    setInterval(draw, 1);
+    function drawGameOver() {
+        ctx.fillStyle = "red";
+        ctx.font = "1000 100px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+    }
+
+
 
 
 
@@ -104,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function (){
         
         
     //vlecenje z misko
-    var dragging;
+    var dragging = false;
     document.addEventListener("mousedown", function(e) {
         var relativeX = e.clientX - canvas.offsetLeft;
         var relativeY = e.clientY - canvas.offsetTop;

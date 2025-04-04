@@ -75,7 +75,7 @@ function drawIt() {
     function init_paddle() {
         paddlex = WIDTH / 2;
         paddleh = 10;
-        paddlew = 75;
+        paddlew = 110;
     }
 
     function drawGameOver() {

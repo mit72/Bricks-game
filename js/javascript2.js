@@ -1,7 +1,7 @@
 function drawIt() {
     var x = 150;
     var y = 150;
-    var speed = 1;
+    var speed = 1.5;
     var dx = 2 * speed;
     var dy = 4 * speed;
     var WIDTH;
@@ -25,13 +25,15 @@ function drawIt() {
     var rowcolors = ["#FF1C0A", "#FFFD0A", "#00A308", "#0008DB", "#EB0093"];
     var paddlecolor = "#000000";
     var ballcolor = "blue";
+    var baget = new Image();
+    baget.src = "img/bageta.png";
 
 
 
     function draw() {
         //end game check
         if (checkEndVar) {
-            clearInterval(drawIt);
+            clearInterval(draw);
             return;
         }
 
@@ -48,12 +50,10 @@ function drawIt() {
 
         //bricks
         for (i = 0; i < NROWS; i++) {
-            ctx.fillStyle = rowcolors[i]; //barvanje vrstic
+             //barvanje vrstic
             for (j = 0; j < NCOLS; j++) {
                 if (bricks[i][j] == 1) {
-                    rect((j * (BRICKWIDTH + PADDING)) + PADDING,
-                        (i * (BRICKHEIGHT + PADDING)) + PADDING,
-                        BRICKWIDTH, BRICKHEIGHT);
+                    ctx.drawImage(baget, (j * (BRICKWIDTH + PADDING)) + PADDING, (i * (BRICKHEIGHT + PADDING)) + PADDING, BRICKWIDTH, BRICKHEIGHT);
                 }
             }
         }
@@ -149,10 +149,10 @@ function drawIt() {
 
     function initbricks() {
         NROWS = 5;
-        NCOLS = 3;
+        NCOLS = 10;
         BRICKWIDTH = (WIDTH / NCOLS) - 1;
-        BRICKHEIGHT = 15;
-        PADDING = 10;
+        BRICKHEIGHT = 16;
+        PADDING = 0;
         bricks = new Array(NROWS);
         for (i = 0; i < NROWS; i++) {
             bricks[i] = new Array(NCOLS);
@@ -244,7 +244,6 @@ function drawIt() {
     init();
     init_paddle();
     initbricks();
-
 
 
 }

@@ -13,7 +13,7 @@ body{
 
 #canvasContainer {
     width: 100vw;
-    height: 100%;
+    height: 90%;
 
     display: flex;
     justify-content: space-evenly;
@@ -22,4 +22,9 @@ body{
 
 #canvas {
     background-color: aliceblue;
+}
+
+#again{
+    height: 5vh;
+    width: 5vw;
 }

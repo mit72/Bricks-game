@@ -1,3 +1,8 @@
+function countDown(){
+    setTimeout(drawIt, 3000);
+    
+}
+
 function drawIt() {
     var x = 150;
     var y = 150;
@@ -99,34 +104,23 @@ function drawIt() {
 
     function circle(x, y, r) {
         ctx.beginPath();
-        ctx.fillStyle = ballcolor;
+        ctx.fillStyle = "rgb(201,0,0)";
         ctx.arc(x, y, r, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.fill();
 
         ctx.beginPath();
-        ctx.fillStyle = "green";
-        ctx.arc(x, y, r-2, 0, Math.PI * 2, true);
+        ctx.fillStyle = "white";
+        ctx.arc(x, y, r-3, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.fill();
 
         ctx.beginPath();
-        ctx.fillStyle = "yellow";
-        ctx.arc(x, y, r-4, 0, Math.PI * 2, true);
+        ctx.fillStyle = "rgb(34,100,181)";
+        ctx.arc(x, y, r-7, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.fill();
 
-        ctx.beginPath();
-        ctx.fillStyle = "orange";
-        ctx.arc(x, y, r-6, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.fillStyle = "red";
-        ctx.arc(x, y, r-8, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
     }
 
     function rect(x, y, w, h) {
@@ -142,9 +136,9 @@ function drawIt() {
 
 
     function init_paddle() {
-        paddlex = WIDTH / 2;
-        paddleh = 10;
         paddlew = 110;
+        paddlex = (WIDTH / 2) /*- paddlew/2*/;
+        paddleh = 10;
     }
 
     function initbricks() {

@@ -3,10 +3,11 @@ function countDown(){
     
 }
 
+
 function drawIt() {
     var x = 150;
     var y = 150;
-    var speed = 1.5;
+    var speed = 1;
     var dx = 2 * speed;
     var dy = 4 * speed;
     var WIDTH;
@@ -48,7 +49,7 @@ function drawIt() {
 
         //paddle
         ctx.fillStyle = paddlecolor;
-        rect(paddlex, HEIGHT - paddleh, paddlew, paddleh);
+        ctx.drawImage(baget, paddlex, HEIGHT - paddleh, paddlew, paddleh);
 
         if (WIDTH - paddlew > paddlex && rightDown) paddlex += 5;
         else if (leftDown && 0 < paddlex) paddlex -= 5;
@@ -67,8 +68,8 @@ function drawIt() {
         rowheight = (BRICKHEIGHT + PADDING) + r / 2;
         colwidth = (BRICKWIDTH + PADDING) + r / 2;
 
-        row = Math.floor(y / rowheight);
-        col = Math.floor(x / colwidth);
+        row = Math.floor(y / rowheight + PADDING);
+        col = Math.floor(x / colwidth + PADDING);
 
         if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
             dy = -dy; bricks[row][col] = 0;
@@ -138,7 +139,7 @@ function drawIt() {
     function init_paddle() {
         paddlew = 110;
         paddlex = (WIDTH / 2) /*- paddlew/2*/;
-        paddleh = 10;
+        paddleh = 20;
     }
 
     function initbricks() {

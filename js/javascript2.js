@@ -1,15 +1,15 @@
-function countDown(){
+function countDown() {
     setTimeout(drawIt, 3000);
-    
+
 }
 
 
 function drawIt() {
-    var x = 150;
-    var y = 150;
-    var speed = 1;
+    var x = 550;
+    var y = 550;
+    var speed = 2;
     var dx = 2 * speed;
-    var dy = 4 * speed;
+    var dy = (-4) * speed;
     var WIDTH;
     var HEIGHT;
     var r = 10;
@@ -18,7 +18,6 @@ function drawIt() {
     var paddlex;
     var paddleh;
     var paddlew;
-    let intervalId;
     var checkEndVar = false;
     var rightDown = false;
     var leftDown = false;
@@ -33,7 +32,10 @@ function drawIt() {
     var ballcolor = "blue";
     var baget = new Image();
     baget.src = "img/bageta.png";
-
+    var wood = new Image();
+    wood.src = "img/wood.png";
+    var tocke;
+    var padltock;
 
 
     function draw() {
@@ -46,17 +48,21 @@ function drawIt() {
         clear();
         checkBricks();
         circle(x, y, 10);
+        
 
         //paddle
         ctx.fillStyle = paddlecolor;
-        ctx.drawImage(baget, paddlex, HEIGHT - paddleh, paddlew, paddleh);
+        ctx.drawImage(wood, paddlex, HEIGHT - paddleh, paddlew, paddleh);
+        let x1 = paddlex + paddlew/2;
+        let y1 = HEIGHT - paddleh + 3;
+        drawLine(x, y, x1, y1);
 
         if (WIDTH - paddlew > paddlex && rightDown) paddlex += 5;
         else if (leftDown && 0 < paddlex) paddlex -= 5;
 
         //bricks
         for (i = 0; i < NROWS; i++) {
-             //barvanje vrstic
+            //barvanje vrstic
             for (j = 0; j < NCOLS; j++) {
                 if (bricks[i][j] == 1) {
                     ctx.drawImage(baget, (j * (BRICKWIDTH + PADDING)) + PADDING, (i * (BRICKHEIGHT + PADDING)) + PADDING, BRICKWIDTH, BRICKHEIGHT);
@@ -65,14 +71,16 @@ function drawIt() {
         }
 
         //za pravilno oddbijanje
-        rowheight = (BRICKHEIGHT + PADDING) + r / 2;
-        colwidth = (BRICKWIDTH + PADDING) + r / 2;
+        rowheight = (BRICKHEIGHT + PADDING);
+        colwidth = (BRICKWIDTH + PADDING);
 
         row = Math.floor(y / rowheight + PADDING);
         col = Math.floor(x / colwidth + PADDING);
 
         if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
             dy = -dy; bricks[row][col] = 0;
+            tocke += 1;
+            $("#tocke").html(tocke);
         }
 
         //bounce
@@ -86,6 +94,7 @@ function drawIt() {
             dy = -dy;
             dx = 8 * ((x - (paddlex + paddlew / 2)) / paddlew);
             console.log("hit on paddle");
+            padltock++;
         } else if (!(x > paddlex && x < paddlex + paddlew) && y > canvas.height - r) {
             checkEndVar = true;
             drawGameOver();
@@ -100,27 +109,20 @@ function drawIt() {
         ctx = $('#canvas')[0].getContext("2d");
         WIDTH = $("#canvas").width();
         HEIGHT = $("#canvas").height();
+        tocke = 0;
+        padltock = 0;
+        $("#tocke").html(tocke);
         return intervalId = setInterval(draw, 10);
     }
 
     function circle(x, y, r) {
         ctx.beginPath();
-        ctx.fillStyle = "rgb(201,0,0)";
+        ctx.fillStyle = "red";
         ctx.arc(x, y, r, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.fill();
 
-        ctx.beginPath();
-        ctx.fillStyle = "white";
-        ctx.arc(x, y, r-3, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
 
-        ctx.beginPath();
-        ctx.fillStyle = "rgb(34,100,181)";
-        ctx.arc(x, y, r-7, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
 
     }
 
@@ -144,9 +146,9 @@ function drawIt() {
 
     function initbricks() {
         NROWS = 5;
-        NCOLS = 10;
+        NCOLS = 5;
         BRICKWIDTH = (WIDTH / NCOLS) - 1;
-        BRICKHEIGHT = 16;
+        BRICKHEIGHT = 32;
         PADDING = 0;
         bricks = new Array(NROWS);
         for (i = 0; i < NROWS; i++) {
@@ -163,6 +165,10 @@ function drawIt() {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+        //fix this
+        ctx.font = "1000 50px Arial";
+        let gg = Math.floor(tocke/padltock*1000)
+        ctx.fillText("Score: " + gg , canvas.width / 2, (canvas.height / 2 ) + 100);
     }
 
     //vlecenje z misko
@@ -233,6 +239,15 @@ function drawIt() {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText("YOU WIN!", canvas.width / 2, canvas.height / 2);
+    }
+
+    function drawLine(x, y , x1, y1){
+        
+        ctx.beginPath();
+        ctx.moveTo(x,y);
+        ctx.lineTo(x1, y1);
+        ctx.stroke();
+        ctx.closePath();
     }
 
 

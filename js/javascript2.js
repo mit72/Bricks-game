@@ -27,9 +27,9 @@ function drawIt() {
     var BRICKWIDTH;
     var BRICKHEIGHT;
     var PADDING;
-    var rowcolors = ["#FF1C0A", "#FFFD0A", "#00A308", "#0008DB", "#EB0093"];
+    //var rowcolors = ["#FF1C0A", "#FFFD0A", "#00A308", "#0008DB", "#EB0093"];
     var paddlecolor = "#000000";
-    var ballcolor = "blue";
+    //var ballcolor = "blue";
     var baget = new Image();
     baget.src = "img/bageta.png";
     var wood = new Image();
@@ -139,13 +139,13 @@ function drawIt() {
 
 
     function init_paddle() {
-        paddlew = 110;
+        paddlew = 150;
         paddlex = (WIDTH / 2) /*- paddlew/2*/;
         paddleh = 20;
     }
 
     function initbricks() {
-        NROWS = 5;
+        NROWS = 1;
         NCOLS = 5;
         BRICKWIDTH = (WIDTH / NCOLS) - 1;
         BRICKHEIGHT = 32;
@@ -230,6 +230,9 @@ function drawIt() {
         if (g == i * j) {
             checkEndVar = true;
             drawWin();
+            ctx.font = "1000 50px Arial";
+            let gg = Math.floor(tocke/padltock*1000)
+            ctx.fillText("Score: " + gg , canvas.width / 2, (canvas.height / 2 ) + 100);
         }
     }
 
@@ -242,7 +245,7 @@ function drawIt() {
     }
 
     function drawLine(x, y , x1, y1){
-        
+        ctx.fillStyle = "lime";
         ctx.beginPath();
         ctx.moveTo(x,y);
         ctx.lineTo(x1, y1);

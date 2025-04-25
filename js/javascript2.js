@@ -31,7 +31,7 @@ function drawIt() {
     var paddlecolor = "#000000";
     //var ballcolor = "blue";
     var baget = new Image();
-    baget.src = "img/bageta.png";
+    baget.src = "img/ribaHighResnoBG.png";
     var wood = new Image();
     wood.src = "img/wood.png";
     var tocke;
@@ -97,7 +97,7 @@ function drawIt() {
             padltock++;
         } else if (!(x > paddlex && x < paddlex + paddlew) && y > canvas.height - r) {
             checkEndVar = true;
-            drawGameOver();
+            //drawGameOver();
         }
         x += dx;
         y += dy;
@@ -146,10 +146,10 @@ function drawIt() {
 
     function initbricks() {
         NROWS = 1;
-        NCOLS = 5;
+        NCOLS = 10;
         BRICKWIDTH = (WIDTH / NCOLS) - 1;
-        BRICKHEIGHT = 32;
-        PADDING = 0;
+        BRICKHEIGHT = 50;
+        PADDING = 1;
         bricks = new Array(NROWS);
         for (i = 0; i < NROWS; i++) {
             bricks[i] = new Array(NCOLS);
@@ -159,17 +159,7 @@ function drawIt() {
         }
     }
 
-    function drawGameOver() {
-        ctx.fillStyle = "red";
-        ctx.font = "1000 100px Arial";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
-        //fix this
-        ctx.font = "1000 50px Arial";
-        let gg = Math.floor(tocke/padltock*1000)
-        ctx.fillText("Score: " + gg , canvas.width / 2, (canvas.height / 2 ) + 100);
-    }
+
 
     //vlecenje z misko
     var dragging = false;
@@ -204,15 +194,15 @@ function drawIt() {
 
     //tipkovnica
     function onKeyDown(evt) {
-        if (evt.keyCode == 39)
+        if (evt.keyCode == 37)
             rightDown = true;
-        else if (evt.keyCode == 37) leftDown = true;
+        else if (evt.keyCode == 39) leftDown = true;
     }
 
     function onKeyUp(evt) {
-        if (evt.keyCode == 39)
+        if (evt.keyCode == 37)
             rightDown = false;
-        else if (evt.keyCode == 37) leftDown = false;
+        else if (evt.keyCode == 39) leftDown = false;
     }
     $(document).keydown(onKeyDown);
     $(document).keyup(onKeyUp);
@@ -229,20 +219,38 @@ function drawIt() {
         }
         if (g == i * j) {
             checkEndVar = true;
-            drawWin();
+            //drawWin();
             ctx.font = "1000 50px Arial";
             let gg = Math.floor(tocke/padltock*1000)
             ctx.fillText("Score: " + gg , canvas.width / 2, (canvas.height / 2 ) + 100);
         }
     }
 
+    /*
     function drawWin() {
+        ctx.rotate(180);
         ctx.fillStyle = "lime";
         ctx.font = "1000 100px Arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText("YOU WIN!", canvas.width / 2, canvas.height / 2);
     }
+
+    function drawGameOver() {
+        ctx.rotate(180 * Math.PI / 180);
+        ctx.fillStyle = "red";
+        ctx.font = "1000 100px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+        //fix this
+        ctx.font = "1000 50px Arial";
+        let gg = Math.floor(tocke/padltock*1000)
+        ctx.fillText("Score: " + gg , canvas.width / 2, (canvas.height / 2 ) + 100);
+        ctx.rotate(180 * Math.PI / 180);
+    }
+    */
+
 
     function drawLine(x, y , x1, y1){
         ctx.fillStyle = "lime";

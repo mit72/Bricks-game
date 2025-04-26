@@ -3,7 +3,7 @@ function countDown() {
 }
 
 function drawIt() {
-    
+    document.getElementById('start').disabled = true;
     let x = 550;
     let y = 500;
     let speed = 1;
@@ -97,6 +97,7 @@ function drawIt() {
         }
         if (count === NROWS * NCOLS) {
             checkEndVar = true;
+            document.getElementById('start').disabled = false;
         }
     }
 
@@ -167,6 +168,7 @@ function drawIt() {
         
         else if (y + dy > HEIGHT - r) {
             checkEndVar = true;
+            document.getElementById('start').disabled = false;
         }
 
         x += dx;

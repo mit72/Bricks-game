@@ -1,6 +1,5 @@
-function countDown() { 
-    setTimeout(drawIt, 3000);
-}
+let intervalId;
+let isPaused = false;
 
 function drawIt() {
     document.getElementById('start').disabled = true;
@@ -21,7 +20,7 @@ function drawIt() {
 
 
     const ballImage = new Image();
-    ballImage.src = "img/hook.png"; 
+    ballImage.src = "img/hook.png";
 
     const bagete = [];
     for (let i = 1; i <= 3; i++) {
@@ -41,7 +40,7 @@ function drawIt() {
         tocke = 0;
         padltock = 0;
         $("#tocke").html(tocke);
-        setInterval(draw, 10);
+        intervalId = setInterval(draw, 10);
     }
 
     function initPaddle() {
@@ -52,11 +51,11 @@ function drawIt() {
 
     function initBricks() {
         NROWS = 3;
-        NCOLS = 10;
+        NCOLS = 11;
         PADDING = 5;
         BRICKWIDTH = (WIDTH - (NCOLS + 1) * PADDING) / NCOLS;
         BRICKHEIGHT = (HEIGHT / 4 - (NROWS + 1) * PADDING) / NROWS;
-
+        let riba = 0;
         bricks = new Array(NROWS);
         for (let i = 0; i < NROWS; i++) {
             bricks[i] = new Array(NCOLS);
@@ -106,14 +105,14 @@ function drawIt() {
 
         clear();
         checkBricks();
-        ctx.drawImage(ballImage, x - r/2, y - r/2, r, r);
+        ctx.drawImage(ballImage, x - r / 2, y - r / 2, r, r);
         //circle(x, y, r);
 
         //paddle
         ctx.drawImage(wood, paddlex, HEIGHT - paddleh, paddlew, paddleh);
         let x1 = paddlex + paddlew - 9;
-        let y1 = HEIGHT - (paddleh/2) + 9;
-        drawLine(x, y+8, x1, y1);
+        let y1 = HEIGHT - (paddleh / 2) + 9;
+        drawLine(x, y + 8, x1, y1);
 
         if (rightDown && paddlex + paddlew < WIDTH) paddlex += 5;
         else if (leftDown && paddlex > 0) paddlex -= 5;
@@ -129,7 +128,6 @@ function drawIt() {
             }
         }
 
-        
         let rowheight = BRICKHEIGHT + PADDING;
         let colwidth = BRICKWIDTH + PADDING;
         let row = Math.floor((y + dy) / rowheight);
@@ -142,7 +140,7 @@ function drawIt() {
             $("#tocke").html(tocke);
         }
 
-        
+
         if (x + dx > WIDTH - r || x + dx < r) dx = -dx;
         if (y + dy < r) dy = -dy;
 
@@ -152,20 +150,20 @@ function drawIt() {
                 dy = -dy;
                 dx = 8 * ((x - (paddlex + paddlew / 2)) / paddlew);
                 padltock++;
-            } 
+            }
             else if (x <= paddlex && x + r >= paddlex) {
-                dx = -Math.abs(dx); 
+                dx = -Math.abs(dx);
                 dy = -dy;
                 padltock++;
             }
             else if (x >= paddlex + paddlew && x - r <= paddlex + paddlew) {
-                dx = Math.abs(dx); 
+                dx = Math.abs(dx);
                 dy = -dy;
                 padltock++;
             }
         }
 
-        
+
         else if (y + dy > HEIGHT - r) {
             checkEndVar = true;
             document.getElementById('start').disabled = false;
@@ -181,29 +179,29 @@ function drawIt() {
     document.addEventListener("mousedown", function (e) {
         let relativeX = e.clientX - canvas.offsetLeft;
         let invertedX = WIDTH - relativeX;
-    
+
         if (invertedX > paddlex && invertedX < paddlex + paddlew) {
             dragging = true;
         }
     });
-    
+
     document.addEventListener("mouseup", function () {
         dragging = false;
     });
-    
+
     document.addEventListener("mousemove", function (e) {
         if (dragging) {
             let relativeX = e.clientX - canvas.offsetLeft;
             let invertedX = WIDTH - relativeX;
-    
+
             if (invertedX > 0 && invertedX < WIDTH) {
                 paddlex = invertedX - paddlew / 2;
             }
         }
     });
-    
-    
-    
+
+
+
 
     // Keyboard controls
     function onKeyDown(evt) {
@@ -216,6 +214,18 @@ function drawIt() {
     }
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("keyup", onKeyUp);
+
+    $("#pause").click(function () {
+        if (isPaused) {
+            isPaused = false;
+            $(this).text("Pause");
+            intervalId = setInterval(draw, 10);
+        } else {
+            isPaused = true;
+            $(this).text("Resume");
+            clearInterval(intervalId);
+        }
+    });
 
     // Start everything
     init();

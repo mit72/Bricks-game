@@ -39,14 +39,11 @@ body{
     box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 
-.gumbek{
-    height: 5vh;
-    width: 5vw;
-}
-
 button{
     border-radius: 3vh;
     border: 0.3vh red solid;
+    height: 5vh;
+    width: 5vw;
 }
 
 #buttonsContainer{

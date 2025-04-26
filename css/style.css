@@ -21,15 +21,20 @@ body{
     width: 100vw;
     height: 70%;
     margin-top: 20vh;
-
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
 #canvas {
-    background-color: rgba(200, 226, 255, 0.8);
+    background-image: url(../img/canvas.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border: 5px rgb(0, 92, 15) solid;
     transform: rotate(180deg);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 
 #again{

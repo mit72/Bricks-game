@@ -5,11 +5,11 @@ function countDown() {
 function drawIt() {
     
     let x = 550;
-    let y = 550;
-    let speed = 2;
-    let dx = 2 * speed;
+    let y = 500;
+    let speed = 1;
+    let dx = 0.1 * speed;
     let dy = -4 * speed;
-    let r = 10;
+    let r = 15;
     let WIDTH, HEIGHT;
     let ctx, canvas;
     let paddlex, paddleh, paddlew;
@@ -19,12 +19,17 @@ function drawIt() {
     let bricks, NROWS, NCOLS, BRICKWIDTH, BRICKHEIGHT, PADDING;
     let tocke, padltock;
 
-    const bagets = [];
+
+    const ballImage = new Image();
+    ballImage.src = "img/hook.png"; 
+
+    const bagete = [];
     for (let i = 1; i <= 3; i++) {
         let img = new Image();
         img.src = `img/riba${i}.png`;
-        bagets.push(img);
+        bagete.push(img);
     }
+
     const wood = new Image();
     wood.src = "img/boat1.png";
 
@@ -56,9 +61,10 @@ function drawIt() {
         for (let i = 0; i < NROWS; i++) {
             bricks[i] = new Array(NCOLS);
             for (let j = 0; j < NCOLS; j++) {
-                bricks[i][j] = bagets[Math.floor(Math.random() * bagets.length)];
+                bricks[i][j] = bagete[Math.floor(Math.random() * bagete.length)];
             }
         }
+        $("#vse").html(NROWS*NCOLS);
     }
 
     function clear() {
@@ -99,13 +105,14 @@ function drawIt() {
 
         clear();
         checkBricks();
-        circle(x, y, r);
+        ctx.drawImage(ballImage, x - r/2, y - r/2, r, r);
+        //circle(x, y, r);
 
         //paddle
         ctx.drawImage(wood, paddlex, HEIGHT - paddleh, paddlew, paddleh);
-        let x1 = paddlex + paddlew - 11;
-        let y1 = HEIGHT - (paddleh/2) +3 ;
-        drawLine(x, y, x1, y1);
+        let x1 = paddlex + paddlew - 9;
+        let y1 = HEIGHT - (paddleh/2) + 9;
+        drawLine(x, y+8, x1, y1);
 
         if (rightDown && paddlex + paddlew < WIDTH) paddlex += 5;
         else if (leftDown && paddlex > 0) paddlex -= 5;
@@ -139,10 +146,22 @@ function drawIt() {
         if (y + dy < r) dy = -dy;
 
         //padle bounce
-        else if (x > paddlex && x < paddlex + paddlew && y + dy > HEIGHT - paddleh - r) {
-            dy = -dy;
-            dx = 8 * ((x - (paddlex + paddlew / 2)) / paddlew);
-            padltock++;
+        if (y + dy > HEIGHT - paddleh - r && y + dy < HEIGHT - r) {
+            if (x > paddlex && x < paddlex + paddlew) {
+                dy = -dy;
+                dx = 8 * ((x - (paddlex + paddlew / 2)) / paddlew);
+                padltock++;
+            } 
+            else if (x <= paddlex && x + r >= paddlex) {
+                dx = -Math.abs(dx); 
+                dy = -dy;
+                padltock++;
+            }
+            else if (x >= paddlex + paddlew && x - r <= paddlex + paddlew) {
+                dx = Math.abs(dx); 
+                dy = -dy;
+                padltock++;
+            }
         }
 
         
@@ -154,15 +173,14 @@ function drawIt() {
         y += dy;
     }
 
-    //
+    //miska
     let dragging = false;
 
     document.addEventListener("mousedown", function (e) {
         let relativeX = e.clientX - canvas.offsetLeft;
-        let relativeY = e.clientY - canvas.offsetTop;
+        let invertedX = WIDTH - relativeX;
     
-        
-        if (relativeX > paddlex && relativeX < paddlex + paddlew && relativeY < paddleh) {
+        if (invertedX > paddlex && invertedX < paddlex + paddlew) {
             dragging = true;
         }
     });
@@ -174,7 +192,6 @@ function drawIt() {
     document.addEventListener("mousemove", function (e) {
         if (dragging) {
             let relativeX = e.clientX - canvas.offsetLeft;
-    
             let invertedX = WIDTH - relativeX;
     
             if (invertedX > 0 && invertedX < WIDTH) {
@@ -182,6 +199,7 @@ function drawIt() {
             }
         }
     });
+    
     
     
 

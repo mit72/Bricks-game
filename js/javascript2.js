@@ -74,8 +74,8 @@ function drawIt() {
         rowheight = (BRICKHEIGHT + PADDING);
         colwidth = (BRICKWIDTH + PADDING);
 
-        row = Math.floor(y / rowheight + PADDING);
-        col = Math.floor(x / colwidth + PADDING);
+        row = Math.floor(y / rowheight);
+        col = Math.floor(x / colwidth);
 
         if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
             dy = -dy; bricks[row][col] = 0;
@@ -149,7 +149,7 @@ function drawIt() {
         NCOLS = 10;
         BRICKWIDTH = (WIDTH / NCOLS) - 1;
         BRICKHEIGHT = 50;
-        PADDING = 1;
+        PADDING = 5;
         bricks = new Array(NROWS);
         for (i = 0; i < NROWS; i++) {
             bricks[i] = new Array(NCOLS);
@@ -219,10 +219,12 @@ function drawIt() {
         }
         if (g == i * j) {
             checkEndVar = true;
-            //drawWin();
+            /*
+            drawWin();
             ctx.font = "1000 50px Arial";
             let gg = Math.floor(tocke/padltock*1000)
             ctx.fillText("Score: " + gg , canvas.width / 2, (canvas.height / 2 ) + 100);
+            */
         }
     }
 

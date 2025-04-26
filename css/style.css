@@ -6,7 +6,7 @@
 html {
     width: 100%;
     height: 100%;
-    background-image: url(../img/image.png);
+    background-image: url(../img/refr12.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -19,7 +19,8 @@ body{
 
 #canvasContainer {
     width: 100vw;
-    height: 90%;
+    height: 70%;
+    margin-top: 20vh;
 
     display: flex;
     justify-content: space-evenly;
@@ -27,7 +28,7 @@ body{
 }
 
 #canvas {
-    background-color: rgba(255, 200, 200, 0.8);
+    background-color: rgba(200, 226, 255, 0.8);
     transform: rotate(180deg);
 }
 
@@ -45,8 +46,4 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#tocke{
-    background-color: aliceblue;
 }

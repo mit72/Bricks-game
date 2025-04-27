@@ -7,6 +7,9 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
     <link rel="icon" type="image/png" href="img/ribaGold.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- jQuerry lib-->
     <script src="js/jQuerry.js"></script>
     <script  src='js/javascript.js'></script>
@@ -14,9 +17,14 @@
 
 <body>
 
-    <div id = "buttonsContainer"><button id="pause" >Pause</button>
-        <button id="start" class="gumbek" onclick="drawIt()">Start</button>
-        <p>Fish: <a id="tocke">0</a>/<a id="vse">0</a></p>
+    <div id = "buttonsContainer">
+        <div id="gumbekContainer">
+            <button id="pause" disabled="true"><img id="playPause" src="img/pause.png"></button>
+            <button id="start" class="gumbek" onclick="drawIt()">Start</button>
+        </div>
+        <div id="counterContainer">
+            <p>Fish: <a id="tocke">0</a><a class="credits">/</a><a id="vse">0</a></p>
+        </div>
     </div>
         
     <div id="canvasContainer">

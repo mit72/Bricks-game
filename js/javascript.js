@@ -1,8 +1,9 @@
 let intervalId;
 let isPaused = false;
-
 function drawIt() {
+    let isPaused = false;
     document.getElementById('start').disabled = true;
+    document.getElementById('pause').disabled = false;
     let x = 550;
     let y = 500;
     let speed = 1;
@@ -55,7 +56,6 @@ function drawIt() {
         PADDING = 5;
         BRICKWIDTH = (WIDTH - (NCOLS + 1) * PADDING) / NCOLS;
         BRICKHEIGHT = (HEIGHT / 4 - (NROWS + 1) * PADDING) / NROWS;
-        let riba = 0;
         bricks = new Array(NROWS);
         for (let i = 0; i < NROWS; i++) {
             bricks[i] = new Array(NCOLS);
@@ -68,14 +68,6 @@ function drawIt() {
 
     function clear() {
         ctx.clearRect(0, 0, WIDTH, HEIGHT);
-    }
-
-    function circle(x, y, r) {
-        ctx.beginPath();
-        ctx.fillStyle = "red";
-        ctx.arc(x, y, r, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
     }
 
     function drawLine(x, y, x1, y1) {
@@ -97,6 +89,18 @@ function drawIt() {
         if (count === NROWS * NCOLS) {
             checkEndVar = true;
             document.getElementById('start').disabled = false;
+            document.getElementById('pause').disabled = true;
+            Swal.fire({
+                title: 'YOU WIN!',
+                text: 'You caught all the fish.',
+                color: 'rgb(0, 92, 15)',
+                icon: 'success',
+                iconColor: 'rgb(0, 92, 15)',
+                confirmButtonText: 'YAY',
+                customClass: {
+                    confirmButton: 'btn-sa',
+                }
+            });
         }
     }
 
@@ -167,6 +171,18 @@ function drawIt() {
         else if (y + dy > HEIGHT - r) {
             checkEndVar = true;
             document.getElementById('start').disabled = false;
+            document.getElementById('pause').disabled = true;
+            Swal.fire({
+                title: 'YOU LOSE!',
+                text: 'You faild to catch all fish.',
+                color: 'rgb(0, 92, 15)',
+                icon: 'error',
+                iconColor: 'rgb(0, 92, 15)',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'btn-sa',
+                }
+            });
         }
 
         x += dx;
@@ -218,11 +234,11 @@ function drawIt() {
     $("#pause").click(function () {
         if (isPaused) {
             isPaused = false;
-            $(this).text("Pause");
+            $("#playPause").attr("src", "img/pause.png");
             intervalId = setInterval(draw, 10);
         } else {
             isPaused = true;
-            $(this).text("Resume");
+            $("#playPause").attr("src", "img/play.png");
             clearInterval(intervalId);
         }
     });
@@ -232,3 +248,24 @@ function drawIt() {
     initPaddle();
     initBricks();
 }
+
+//sweet alert
+document.addEventListener("DOMContentLoaded", function () {
+    const asterisk = document.querySelector('.credits');
+
+    asterisk.addEventListener('click', () => {
+
+        Swal.fire({
+            title: 'Author',
+            text: 'Mitja Filej, 4.Rb',
+            color: 'rgb(0, 92, 15)',
+            icon: 'info',
+            iconColor: 'rgb(0, 92, 15)',
+            confirmButtonText: 'OK',
+            customClass: {
+                confirmButton: 'btn-sa',
+            }
+        });
+
+    });
+});

@@ -18,7 +18,28 @@ function drawIt() {
     let leftDown = false;
     let bricks, NROWS, NCOLS, BRICKWIDTH, BRICKHEIGHT, PADDING;
     let tocke, padltock;
+    var sekunde;
+    var sekundeI;
+    var minuteI;
+    var intTimer;
+    var izpisTimer;
+    //timer
+    function timer() {
+        if (checkEndVar == false) {
+            sekunde++;
 
+            sekundeI = ((sekundeI = (sekunde % 60)) > 9) ? sekundeI : "0" + sekundeI;
+            minuteI = ((minuteI = Math.floor(sekunde / 60)) > 9) ? minuteI : "0" + minuteI;
+            izpisTimer = minuteI + ":" + sekundeI;
+
+            $("#cas").html(izpisTimer);
+        }
+        else {
+            sekunde = 0;
+            //izpisTimer = "00:00";
+            $("#cas").html(izpisTimer);
+        }
+    }
 
     const ballImage = new Image();
     ballImage.src = "img/hook.png";
@@ -42,6 +63,13 @@ function drawIt() {
         padltock = 0;
         $("#tocke").html(tocke);
         intervalId = setInterval(draw, 10);
+        sekunde = 0;
+        izpisTimer = "00:00";
+        if (intTimer) clearInterval(intTimer); // clear existing timer if any
+        sekunde = 0;
+        izpisTimer = "00:00";
+        $("#cas").html(izpisTimer);
+        intTimer = setInterval(timer, 1000);
     }
 
     function initPaddle() {
@@ -63,7 +91,7 @@ function drawIt() {
                 bricks[i][j] = bagete[Math.floor(Math.random() * bagete.length)];
             }
         }
-        $("#vse").html(NROWS*NCOLS);
+        $("#vse").html(NROWS * NCOLS);
     }
 
     function clear() {
@@ -87,6 +115,7 @@ function drawIt() {
             }
         }
         if (count === NROWS * NCOLS) {
+            clearInterval(intTimer);
             checkEndVar = true;
             document.getElementById('start').disabled = false;
             document.getElementById('pause').disabled = true;
@@ -170,6 +199,7 @@ function drawIt() {
 
         else if (y + dy > HEIGHT - r) {
             checkEndVar = true;
+            clearInterval(intTimer);
             document.getElementById('start').disabled = false;
             document.getElementById('pause').disabled = true;
             Swal.fire({

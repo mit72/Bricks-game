@@ -25,7 +25,7 @@ function drawIt() {
     var izpisTimer;
     //timer
     function timer() {
-        if (checkEndVar == false && !isPaused) {
+        if (checkEndVar == false && isPaused == false) {
             sekunde++;
 
             sekundeI = ((sekundeI = (sekunde % 60)) > 9) ? sekundeI : "0" + sekundeI;

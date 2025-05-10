@@ -1,89 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset='utf-8'>
-    <title>Lucky 38 Casino</title>
+    <title>Lazy Lake</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/css1.css'>
-    <link rel="icon" type="image/png" href="img/Lucky38entsign.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
+    <link rel="icon" type="image/png" href="img/ribaGold.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jQuerry lib-->
+    <script src="js/jQuerry.js"></script>
+    <script  src='js/javascript.js'></script>
 </head>
 
 <body>
-    <div class="noise-overlay"></div>
-    <div class="scanlines-overlay"></div>
-    
-    <form>
-        <div id="mainContainer">
-            <div id="topContainer" class="animate__animated animate__fadeInDown">
-                <img id="titleImg" src="img/Lucky38entsign.png" class="logo-glow">
-                <h1 class="neon-title">LUCKY 38 CASINO</h1>
-                <p class="subtitle">EST. 2281 • NEW VEGAS</p>
-            </div>
-            
-            <div id="centerContainer">
-                <div id="playerCenterContainer">
-                    <div class="player animate__animated animate__fadeInLeft">
-                        <label>Player 1:</label>
-                        <input id="1" class="textInput" type="text" placeholder="Enter name">
-                        <div class="input-glow"></div>
-                    </div>
-                    <div class="player animate__animated animate__fadeInUp">
-                        <label>Player 2:</label>
-                        <input id="2" class="textInput" type="text" placeholder="Enter name">
-                        <div class="input-glow"></div>
-                    </div>
-                    <div class="player animate__animated animate__fadeInRight">
-                        <label>Player 3:</label>
-                        <input id="3" class="textInput" type="text" placeholder="Enter name">
-                        <div class="input-glow"></div>
-                    </div>
-                </div>
-                
-                <div id="controlCenterContainer">
-                    <div class="dropdown animate__animated animate__fadeInLeft animate__delay-1s">
-                        <label for="dice">Number of dice:</label>
-                        <div class="select-wrapper">
-                            <select name="dice" id="dice" required>
-                                <option selected>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                            <div class="select-arrow"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="dropdown animate__animated animate__fadeInRight animate__delay-1s">
-                        <label for="rounds">Number of rounds:</label>
-                        <div class="select-wrapper">
-                            <select name="rounds" id="rounds" required>
-                                <option selected>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                            </select>
-                            <div class="select-arrow"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="bottomContainer" class="animate__animated animate__fadeInUp animate__delay-2s">
-                <button id="startButton" type="submit">
-                    <span class="btn-text">BEGIN GAME</span>
-                    <span class="btn-glow"></span>
-                </button>
-            </div>
+
+    <div id = "buttonsContainer">
+        <div id="gumbekContainer">
+            <button id="pause" disabled="true"><img id="playPause" src="img/pause.png"></button>
+            <button id="start" class="gumbek" onclick="drawIt()">Start</button>
         </div>
-    </form>
+        <div id="counterContainer">
+            <p>Fish: <a id="tocke">0</a><a class="credits">/</a><a id="vse">0</a></p>
+            <p>Time: <a id="cas">00:00</a></p>
+        </div>
+    </div>
+        
+    <div id="canvasContainer">
+        <canvas id="canvas" height="600" width="1000"></canvas>
+        
+    </div>
 </body>
 
 </html>

@@ -1,121 +1,102 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    font-size: 2vh;
-    font-family: fnvFont;
-    color: #e0bf48;
+    font-size: 3vh;
+    color: rgb(0, 92, 15);
+    font-family: 'Fredoka', sans-serif;
+    overflow: hidden;
 }
 
 html {
     width: 100%;
     height: 100%;
-    background-image: url(../img/lucky38bg.png);
+    background-image: url(../img/refr12.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-body, form{
+body {
+    width: 100%;
     height: 100%;
 }
 
-form{
-    display: flex;
-}
+#canvasContainer {
+    width: 90vw;
+    height: 70%;
 
-#titleImg{
-    height: 25vh;
-
-}
-
-#mainContainer{
-    height: 95%;
-    width: 60%;
-    display: block;
     margin: auto;
-    border: 1vh rgba(255, 211, 65, 0.8), solid;
-    border-radius: 0.5vh;
-    box-shadow: 0 0 3vw 1vw #e0bf48;
-    color: #e0bf48;
-    text-shadow: #e0bf48;
-    background-image: url(../img/static.png);
+    margin-top: 5vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#canvas {
+    background-image: url(../img/canvas.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    border: 5px rgb(0, 92, 15) solid;
+    transform: rotate(180deg);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 
-#topContainer{
-    display: flex;
-    height: 30vh;
-    width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
+button {
+    border-radius: 3vh;
+    border: 0.3vh rgb(0, 92, 15) solid;
+    height: 5vh;
+    width: 5vw;
 }
 
-#centerContainer{
-    height: 50vh;
-    width: 100%;
-}
-
-#playerCenterContainer{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-top: 20vh;
-    margin-bottom: 5vh;
-}
-
-#bottomContainer{
-    display: flex;
-    height: 20vh;
-    width: 100%;
-    justify-content: space-around;
-}
-
-.player{
-    border: 1vh rgba(255, 211, 65, 0.8), solid;
-    border-radius: 0.5vh;
-    box-shadow: 0 0 3vw 1vw #e0bf48;
-    color: #e0bf48;
-    text-shadow: #e0bf48;
-    height: 10vh;
-    width: 15vw;
+#buttonsContainer {
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2vw;
     display: block;
-    background-image: url(../img/static.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    border: 5px rgb(0, 92, 15) solid;
+    width: 20vw;
+    background-image: url(../img/refr1.png);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 
-#controlCenterContainer{
+#counterContainer {
+
     display: flex;
-    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+        1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+
+}
+
+#gumbekContainer {
+    display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-#startButton{
-    height: 10vh;
+#playPause {
+    height: 1vw;
+    width: 1vw;
 }
 
-select{
-    background-color: black;
-    border: 0.5vh rgba(255, 211, 65, 0.8), solid;
-    box-shadow: 0 0 3vw 1vw #e0bf48;
-    border-radius: 0.5vh;
+.btn-sa{
+    border: 1px solid rgb(0, 92, 15);
+    border-radius: 5px;
+    
+    background-color: white;
+    color: rgb(0, 92, 15);
+    padding-bottom: 5vh;
+    padding-right: 4vw;
+    font-family: 'Fredoka', sans-serif;
 }
 
-.textInput{
-    background-color: black;
-    border: 0.2vh rgba(255, 211, 65, 0.8), solid;
-    border-radius: 0.5vh;
-}
-
-@font-face {
-    font-family: fnvFont;
-    src: url(../fonts/monofonto.ttf);
+.credits:hover{
+    cursor: pointer;
 }

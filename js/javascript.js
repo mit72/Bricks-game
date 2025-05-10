@@ -1,6 +1,6 @@
-    let intervalId;
-    let isPaused = false;
-    function drawIt() {
+let intervalId;
+let isPaused = false;
+function drawIt() {
     let isPaused = false;
     document.getElementById('start').disabled = true;
     document.getElementById('pause').disabled = false;
@@ -266,12 +266,10 @@
             isPaused = false;
             $("#playPause").attr("src", "img/pause.png");
             intervalId = setInterval(draw, 10);
-            intTimer = setInterval(timer, 1000);
         } else {
             isPaused = true;
             $("#playPause").attr("src", "img/play.png");
             clearInterval(intervalId);
-            clearInterval(intTimer);
         }
     });
 
